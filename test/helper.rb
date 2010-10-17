@@ -1,10 +1,12 @@
 require 'rubygems'
 require 'test/unit'
 require 'shoulda'
+require 'mocha'
+require 'mock_serial_port'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
-require 'tag-it'
+require 'tag_it'
 
 class Test::Unit::TestCase
 end
