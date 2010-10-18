@@ -25,10 +25,29 @@ class TestTagTracker < Test::Unit::TestCase
       watcher.expects(:update).with("1nwP",79,:tag_arrived).times(1)
       check_data_extract(data,watcher)
     end
+    
+    should "clear send out departing events when no tags in range" do
+      data = " 1nri85 1nwP79 1nri85 1nwP79 1nri85 1nwP79 "
+      watcher = TagObserver.new
+      watcher.expects(:update).with("1nri",85,:tag_arrived).times(1)
+      watcher.expects(:update).with("1nwP",79,:tag_arrived).times(1)
+      watcher.expects(:update).with("1nri",0,:tag_departed).times(1)
+      watcher.expects(:update).with("1nwP",0,:tag_departed).times(1)
+      check_data_extract(data,watcher,TimeoutSerialPort)
+    end
+    
+    should "dispatch a departing event when one tag leaves" do
+      data = " 1nri85 1nwP79 1nwP79 1nwP79 1nwP79 1nwP79 1nwP79 1nwP79 1nwP79 1nwP79 "
+      watcher = TagObserver.new
+      watcher.expects(:update).with("1nri",85,:tag_arrived).times(1)
+      watcher.expects(:update).with("1nwP",79,:tag_arrived).times(1)
+      watcher.expects(:update).with("1nri",0,:tag_departed).times(1)
+      check_data_extract(data,watcher,PacingSerialPort)
+    end
   end
   
-  def check_data_extract(data,watcher)
-    port = MockSerialPort.new(data)
+  def check_data_extract(data,watcher,port_mocker = MockSerialPort)
+    port = port_mocker.new(data)
     tracker = TagIt::TagTracker.new(port)
     tracker.add_observer(watcher)
     tracker.start!
