@@ -6,8 +6,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "tag-it"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{interaction with RFID receiver through a serial port.}
+    gem.description = %Q{Interacting with RFID receivers through serial ports is not much fun.  This makes it a little better.  tag-it provides a class that will monitor a serial port for you, and will dispatch events through ruby's standard "observer" functionality when a tag comes into range and leaves.}
     gem.email = "ethan.vizitei@gmail.com"
     gem.homepage = "http://github.com/evizitei/tag-it"
     gem.authors = ["evizitei"]
