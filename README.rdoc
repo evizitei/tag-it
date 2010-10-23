@@ -32,6 +32,8 @@ Typical usage involves building an observer like this:
         # do something because a tag has come into range
       elsif event == :tag_departed
         # do something because a tag has gone out of range
+      elsif even == :pulse
+        # let something know the client is still active
       end
     end
   end
@@ -45,7 +47,9 @@ And then attaching it to a tag-it tag_tracker like this:
   tracher.add_observer(watcher)
   tracker.start!
   
-the tracker will run indefinately, pulling in tag ids as they come into range and leave the area, and dispatch the necessary events. Right now there are 2 events -- :tag_arrived when the tag comes into range, and :tag_departed when it leaves.  The other parameters to the update method are the tag id ("1nrw") and the Relative Signal Strength (an integer: 34, 86, etc) indicating how close to the source the tag is.
+the tracker will run indefinately, pulling in tag ids as they come into range and leave the area, and dispatch the necessary events.  It also will dispatch a "pulse" event every 3 minutes so you know that the client is still running. Right now there are 3 events -- :tag_arrived when the tag comes into range, :tag_departed when it leaves, and the :pulse event every three minutes.  The other parameters to the update method are the tag id ("1nrw") and the Relative Signal Strength (an integer: 34, 86, etc) indicating how close to the source the tag is. 
+
+ATTENTION!:  In the "pulse" event, the tag parameter will actually be an array of currently in-range tags
 
 Happy Tagging!
 
