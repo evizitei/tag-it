@@ -9,6 +9,7 @@ module TagIt
     def initialize(port)
       @port = port
       @tag_map ||= {}
+      @last_pulse = Time.now
     end
     
     def start!
@@ -38,6 +39,9 @@ module TagIt
         rescue Timeout::Error
           depart_all_tags!
         end
+        if ((Time.now - 180) > @last_pulse)
+          pulse!
+        end  
       end
     end
     
@@ -73,6 +77,12 @@ module TagIt
     
     def split_tag_data(tag_name)
       [tag_name[0,4],tag_name[4,tag_name.size - 4].to_i]
+    end
+    
+    def pulse!
+      changed
+      notify_observers(@tag_map.keys.sort,0,:pulse)
+      @last_pulse = Time.now
     end
   end
 end

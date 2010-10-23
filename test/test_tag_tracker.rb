@@ -44,6 +44,24 @@ class TestTagTracker < Test::Unit::TestCase
       watcher.expects(:update).with("1nri",0,:tag_departed).times(1)
       check_data_extract(data,watcher,PacingSerialPort)
     end
+    
+    should "dispatch a heartbeat event every 180 seconds" do
+      start_time = Time.local(2008, 9, 1, 12, 0, 0)
+      end_time = start_time + 300
+      Timecop.freeze(start_time)
+      data = " 1nri85 1nwP79 "
+      watcher = TagObserver.new
+      watcher.expects(:update).with("1nri",85,:tag_arrived).times(1)
+      watcher.expects(:update).with("1nwP",79,:tag_arrived).times(1)
+      watcher.expects(:update).with(["1nri","1nwP"],0,:pulse).times(1)
+      port = MockSerialPort.new(data)
+      tracker = TagIt::TagTracker.new(port)
+      tracker.add_observer(watcher)
+      tracker.start!
+      Timecop.travel(end_time)
+      tracker.start!
+      Timecop.return
+    end
   end
   
   def check_data_extract(data,watcher,port_mocker = MockSerialPort)

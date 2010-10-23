@@ -2,6 +2,10 @@ source 'http://rubygems.org'
 
 gem 'jeweler'
 gem 'ruby-serialport'
-gem 'mocha'
-gem 'test-unit'
-gem 'thoughtbot-shoulda'
+
+group :development do
+  gem 'test-unit'
+  gem 'mocha'
+  gem 'thoughtbot-shoulda'
+  gem 'timecop'
+end
