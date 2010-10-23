@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{tag-it}
-  s.version = "0.1.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["evizitei"]
-  s.date = %q{2010-10-17}
+  s.date = %q{2010-10-23}
   s.description = %q{Interacting with RFID receivers through serial ports is not much fun.  This makes it a little better.  tag-it provides a class that will monitor a serial port for you, and will dispatch events through ruby's standard "observer" functionality when a tag comes into range and leaves.}
   s.email = %q{ethan.vizitei@gmail.com}
   s.extra_rdoc_files = [
@@ -28,6 +28,8 @@ Gem::Specification.new do |s|
      "VERSION",
      "lib/tag_it.rb",
      "lib/tag_it/tag_tracker.rb",
+     "pkg/tag-it-0.1.0.gem",
+     "tag-it.gemspec",
      "test/helper.rb",
      "test/mock_serial_port.rb",
      "test/test_tag_tracker.rb"
