@@ -1,6 +1,54 @@
-= tag-it
+= Tag-it
+== RFID integration in Ruby
 
-Description goes here.
+Active RFID can be a game changer in certain fields (time-clock, fleet tracking, etc).  Why are you still doing it the old fashioned way?
+
+Tag-it is a ruby gem that you can start up to monitor an RFID receiver; just create an observer to watch the tag events roll in and you can automatically tell your webservice or other system when things arrive and depart without having to do any data input at all.
+
+== Installation
+
+The recommended way is that you get the gem hosted on rubygems.org:
+
+  gem install tag-it
+
+I suggest you use ruby 1.8.7, I've had problems so far with ruby 1.9.x and this project.  
+
+== Prerequisites:
+
+1) You will need the hardware (an RFID receiver and RFID tags).  I bought mine from http://cliste.sailwhatcom.com/, and these are the only ones the library will work with out of the box yet.
+
+2) you will need the serial-to-usb port driver for your OS installed: http://www.prolific.com.tw/eng/downloads.asp?ID=31
+
+3) tag-it uses the 'ruby-serialport' gem for device communication.  Make sure you have that installed and working.
+
+
+== Example usage
+
+Typical usage involves building an observer like this:
+  
+  class YourCustomObserver
+    def update(tag,strength,event)
+      if event == :tag_arrived
+        # do something because a tag has come into range
+      elsif event == :tag_departed
+        # do something because a tag has gone out of range
+      end
+    end
+  end
+
+And then attaching it to a tag-it tag_tracker like this:
+
+  require "tag_it"
+  port = SerialPort.new("/dev/tty.yourport",{:baud=>9600})
+  tracker = TagIt::TagTracker.new(port)
+  watcher = YourCustomObserver.new
+  tracher.add_observer(watcher)
+  tracker.start!
+  
+the tracker will run indefinately, pulling in tag ids as they come into range and leave the area, and dispatch the necessary events. Right now there are 2 events -- :tag_arrived when the tag comes into range, and :tag_departed when it leaves.  The other parameters to the update method are the tag id ("1nrw") and the Relative Signal Strength (an integer: 34, 86, etc) indicating how close to the source the tag is.
+
+Happy Tagging!
+
 
 == Note on Patches/Pull Requests
  
