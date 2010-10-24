@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{tag-it}
-  s.version = "0.2.1"
+  s.version = "0.2.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["evizitei"]
@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
      "lib/tag_it.rb",
      "lib/tag_it/tag_tracker.rb",
      "pkg/tag-it-0.1.0.gem",
+     "pkg/tag-it-0.2.1.gem",
      "tag-it.gemspec",
      "test/helper.rb",
      "test/mock_serial_port.rb",
@@ -51,11 +52,23 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<thoughtbot-shoulda>, [">= 0"])
+      s.add_development_dependency(%q<test-unit>, [">= 0"])
+      s.add_development_dependency(%q<mocha>, [">= 0"])
+      s.add_development_dependency(%q<timecop>, [">= 0"])
+      s.add_runtime_dependency(%q<ruby-serialport>, [">= 0"])
     else
       s.add_dependency(%q<thoughtbot-shoulda>, [">= 0"])
+      s.add_dependency(%q<test-unit>, [">= 0"])
+      s.add_dependency(%q<mocha>, [">= 0"])
+      s.add_dependency(%q<timecop>, [">= 0"])
+      s.add_dependency(%q<ruby-serialport>, [">= 0"])
     end
   else
     s.add_dependency(%q<thoughtbot-shoulda>, [">= 0"])
+    s.add_dependency(%q<test-unit>, [">= 0"])
+    s.add_dependency(%q<mocha>, [">= 0"])
+    s.add_dependency(%q<timecop>, [">= 0"])
+    s.add_dependency(%q<ruby-serialport>, [">= 0"])
   end
 end
 
