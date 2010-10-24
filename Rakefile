@@ -12,6 +12,10 @@ begin
     gem.homepage = "http://github.com/evizitei/tag-it"
     gem.authors = ["evizitei"]
     gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
+    gem.add_development_dependency'test-unit'
+    gem.add_development_dependency 'mocha'
+    gem.add_development_dependency 'timecop'
+    gem.add_dependency "ruby-serialport"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
