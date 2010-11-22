@@ -47,9 +47,17 @@ And then attaching it to a tag-it tag_tracker like this:
   tracher.add_observer(watcher)
   tracker.start!
   
-the tracker will run indefinately, pulling in tag ids as they come into range and leave the area, and dispatch the necessary events.  It also will dispatch a "pulse" event every 3 minutes so you know that the client is still running. Right now there are 3 events -- :tag_arrived when the tag comes into range, :tag_departed when it leaves, and the :pulse event every three minutes.  The other parameters to the update method are the tag id ("1nrw") and the Relative Signal Strength (an integer: 34, 86, etc) indicating how close to the source the tag is. 
+the tracker will run indefinitely, pulling in tag ids as they come into range and leave the area, and dispatch the necessary events.  It also will dispatch a "pulse" event every 3 minutes so you know that the client is still running. Right now there are 3 events -- :tag_arrived when the tag comes into range, :tag_departed when it leaves, and the :pulse event every three minutes.  The other parameters to the update method are the tag id ("1nrw") and the Relative Signal Strength (an integer: 34, 86, etc) indicating how close to the source the tag is. 
 
 ATTENTION!:  In the "pulse" event, the tag parameter will actually be an array of currently in-range tags
+
+As of version 0.3.0, you don't have to use the tracker.  If you just want to fetch a quick snapshot of all tags currently in range, the TagIt TagSnapshot will do the trick:
+
+  require "tag_it"
+  port = SerialPort.new("/dev/tty.yourport",{:baud=>9600})
+  snapshot = TagIt::TagSnapshot.new(port)
+  tags = snapshot.shoot!
+  # tags => ["1nri","1okD","1nrP"]
 
 Happy Tagging!
 
