@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{tag-it}
-  s.version = "0.3.1"
+  s.version = "0.3.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["evizitei"]
@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
      "pkg/tag-it-0.1.0.gem",
      "pkg/tag-it-0.2.1.gem",
      "pkg/tag-it-0.2.2.gem",
+     "pkg/tag-it-0.3.1.gem",
      "tag-it.gemspec",
      "test/helper.rb",
      "test/mock_serial_port.rb",
