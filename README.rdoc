@@ -58,6 +58,8 @@ As of version 0.3.0, you don't have to use the tracker.  If you just want to fet
   snapshot = TagIt::TagSnapshot.new(port)
   tags = snapshot.shoot!
   # tags => ["1nri","1okD","1nrP"]
+  
+Both the Tracker and the Snapshot class are subclasses of TagIt::Monitor, which does the heavy lifting of tag parsing, so if you want to engineer your own functionality, you could make a custom TagIt implementation by making your own subclass and taking advantage of the "monitor" method which you can pass a block to (it will yield each tag name it finds back to you, one by one).  
 
 Happy Tagging!
 
